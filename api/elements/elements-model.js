@@ -4,8 +4,8 @@ const getAll = () => {
     return db("elements").orderBy("periodic_number");
 };
 
-const getById = (element_id) => {
-    return db("elements").where(element_id).first();
+const getById = async (element_id) => {
+    return await db("elements").where("element_id", element_id).first();
 };
 
 
@@ -14,8 +14,9 @@ const insert = async (newElement) => {
     return getById(element_id);
 };
 
-const remove = (element_id) => {
-    return db("elements").where(element_id).del();
+const remove = async (element_id) => {
+    let id = parseInt(element_id)
+    return await db("elements").where("element_id", id).del();
 };
 
 

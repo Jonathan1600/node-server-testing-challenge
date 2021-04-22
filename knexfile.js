@@ -7,6 +7,11 @@ module.exports = {
     connection: {
       filename: './data/elements.db3',
     },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA journal_mode = WAL', done)
+      },
+    },
   },
   testing: {
     client: 'sqlite3',
@@ -15,6 +20,11 @@ module.exports = {
     seeds: { directory: './data/seeds' },
     connection: {
       filename: './data/test.db3',
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA journal_mode = WAL', done)
+      },
     },
   },
   production: {
